@@ -3,14 +3,18 @@
   </div>
   
   <!-- Student form -->
-  <form [formGroup]="newClassroomForm" (ngSubmit)="submitClassData()" novalidate>
+  <form [formGroup]="newClassroomsForm" (ngSubmit)="submitClassroomData()" novalidate>
     <div class="row">
       <div class="col-lg-5 col-md-12 col-sm-12">
         <div class="row">
   
           <div class="col-md-12 mb-3">
             <label>Select Class</label>
-            <select formControlName="className" class="form-control" id=""></select>
+            <select formControlName="className" class="form-control" required>
+              <option
+                *ngFor="let classroom of Classroom" 
+                [value]="classroom.className">{{classroom.className}}</option>
+            </select>
           </div>
   
           <div class="col-md-12 mb-3">
@@ -18,7 +22,7 @@
             <input type="text" formControlName="index" class="form-control" required>
             <!-- Showing errors using getter method -->
             <p *ngIf="index.touched && index.invalid" class="error"><sup>*</sup>Please enter index number</p>
-            <p *ngIf="index.errors?.minlength" class="error"><sup>*</sup>ID shouldn't be less than 2 words</p>
+            <p *ngIf="index.errors?.minlength" class="error"><sup>*</sup>ID shouldn't be less than 12 words</p>
           </div>
   
           <div class="col-md-12 mb-3">
@@ -31,9 +35,9 @@
         <div class="row">
   
           <div class="col-md-12 mb-3">
-            <label>Time (came for)</label>
-            <input [owlDateTimeTrigger]="dt" [owlDateTime]="dt" formControlName="startTime" class="form-control" required>
-            <owl-date-time #dt></owl-date-time>
+            <label>Time (took)</label>
+            <input ngbDatepicker (click)="datePicker.toggle()" #datePicker="ngbDatepicker" formControlName="startDate" placeholder="pick a date" class="form-control">
+            <ngb-timepicker formControlName="startTime" meridian="meridian"></ngb-timepicker>
             <!-- Showing errors using getter method -->
             <!-- <p *ngIf="programme.touched && firstName.invalid" class="error"><sup>*</sup>Please enter atleast a programme</p>
             <p *ngIf="programme.errors?.minlength" class="error"><sup>*</sup>Programme shouldn't be less than 2 words</p> -->
@@ -41,16 +45,11 @@
   
           <div class="col-md-12 mb-3">
             <label>Time (returned)</label>
-            <input [owlDateTimeTrigger]="dt" [owlDateTime]="dt" formControlName="endTime" class="form-control" required>
-            <owl-date-time #dt></owl-date-time>
+            <input formControlName="endTime" placeholder="pick a date" class="form-control">
+            
             <!-- Showing errors using getter method -->
             <!-- <p *ngIf="programme.touched && firstName.invalid" class="error"><sup>*</sup>Please enter atleast a programme</p>
             <p *ngIf="programme.errors?.minlength" class="error"><sup>*</sup>Programme shouldn't be less than 2 words</p> -->
-          </div>
-
-          <div class="col-md-12 mb-3">
-            <label>Status</label>
-            <select formControlName="status" class="form-control" id=""></select>
           </div>
   
         </div>
@@ -58,7 +57,7 @@
   
         <div class="form-group text-right">
           <button type="button" class="btn btn-secondary gap-right" (click)="ResetForm()">Reset</button>
-          <button type="submit" class="btn btn-success" [disabled]="!studentForm.valid">Add Record</button>
+          <button type="submit" class="btn btn-success" [disabled]="!newClassroomsForm.valid">Add Record</button>
         </div>
   
       </div>

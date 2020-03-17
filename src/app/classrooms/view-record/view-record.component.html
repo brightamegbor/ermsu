@@ -1,14 +1,9 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Classrooms</h1>
+    <h1 class="h2">Classrooms Records</h1>
     <!-- It won't show if there is no student data -->
     <a routerLink="/add-classrecords" class="btn btn-success">
       <i class="fas fa-search custom-fa-search"></i>
       Add Record
-    </a>
-
-    <a routerLink="/view-records" class="btn btn-dark">
-      <i class="fas fa-eye custom-fa-search"></i>
-      View Records
     </a>
 
     <!-- <a routerLink="/register-student" class="btn btn-success">
@@ -21,13 +16,13 @@
   
     <!-- Preloader shows before the data loads-->
     <div class="no-data text-center" *ngIf="preLoader">
-      <img src="assets/preloader.gif" class="preloader-icon" alt="No Classroom">
+      <img src="assets/preloader.gif" class="preloader-icon" alt="No Classroom Record">
     </div>
   
     <!-- No data shows when their is no student data available -->
     <div class="no-data text-center" *ngIf="noData">
       <img src="assets/no-student.svg" class="nodata-msg" alt="No Classroom">
-      <p class="nodata-msg">No Classroom added yet!</p>
+      <p class="nodata-msg">No Classroom Record added yet!</p>
       <!-- <a routerLink="/register-student" class="btn btn-success">
         <i class="fas fa-plus custom-fa-plus"></i>
         Add Classroom
@@ -39,10 +34,13 @@
       <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
         <thead>
           <tr>
-            <th scope="col">Classroom Id</th>
-            <th scope="col">Classroom Name</th>
-            <th scope="col">Classroom Block</th>
-            <th class="text-center" scope="col">Add Record</th>
+            <th scope="col">Record Id</th>
+            <th scope="col">Student ID</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Class Name</th>
+            <th scope="col">Took Time</th>
+            <th scope="col">Returned Time</th>
+            <th class="text-center" scope="col">Edit Record</th>
           </tr>
         </thead>
         <tbody>
@@ -50,10 +48,13 @@
           <!-- paginate pipe will add pagination in student's list, it won't show if items are less then 7 -->
           <tr *ngFor="let classroom of Classroom | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
             <th scope="row">{{classroom.$key}}</th>
+            <td>{{classroom.index}}</td>
+            <td>{{classroom.studentName}}</td>
             <td>{{classroom.className}}</td>
-            <td>{{classroom.classBlock}}</td>
+            <td>{{classroom.startTime}}</td>
+            <td>{{classroom.endTime}}</td>
             <td class="text-center action-block">
-              <i class="fas fa-plus" routerLink="/add-classrecords/{{classroom.$key}}"></i>
+              <i class="fas fa-plus" routerLink="/edit-classrecords/{{classroom.$key}}"></i>
               <!-- <i class="far fa-trash-alt" (click)="deleteStudent(student)"></i> -->
             </td>
           </tr>

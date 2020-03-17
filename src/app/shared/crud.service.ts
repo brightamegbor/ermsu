@@ -14,6 +14,8 @@ export class CrudService {
   studentRef: AngularFireObject<any>;   // Reference to Student object, its an Observable too
 
   classroomsRef: AngularFireList<any>;
+  classroomRef: AngularFireObject<any>;
+
   classrecordRef: AngularFireObject<any>;
   classrecordsRef: AngularFireList<any>;
 
@@ -69,8 +71,7 @@ export class CrudService {
       studentName: classroom.studentName,
       className: classroom.className,
       startTime: classroom.startTime,
-      endTime: classroom.endTime,
-      status: classroom.status
+      endTime: classroom.endTime
     });
   }
 
@@ -86,6 +87,11 @@ export class CrudService {
     return this.classroomsRef;
   }
 
+  GetClassroom(id: string) {
+    this.classroomRef = this.db.object('classrooms-list/' + id);
+    return this.classroomRef;
+  }
+
   GetClassRecordsList() {
     this.classrecordsRef = this.db.list('classrecords-list');
     return this.classrecordsRef;
@@ -98,8 +104,14 @@ export class CrudService {
       studentName: classroom.studentName,
       className: classroom.className,
       startTime: classroom.startTime,
-      endTime: classroom.endTime,
-      status: classroom.status
+      endTime: classroom.endTime
     });
   }
+
+  UpdateClassRoom(classroom: Classroom) {
+  this.classroomRef.update({
+    status: 'occupied'
+  });
+}
+
 }

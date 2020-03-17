@@ -1,3 +1,4 @@
+import { ViewRecordComponent } from './classrooms/view-record/view-record.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'add-classrecords', component: ClassrecordsComponent },
   { path: 'edit-classrecords/:id', component: EditrecordsComponent },
   { path: 'add-officerecords', component: AddrecordsComponent },
+  { path: 'view-records', component: ViewRecordComponent}
 ];
 
 // Import RouterModule and inject routes array in it and dont forget to export the RouterModule

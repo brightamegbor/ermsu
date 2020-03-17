@@ -31,7 +31,8 @@ import { ClassrecordsComponent } from './classrooms/classrecords/classrecords.co
 import { EditrecordsComponent } from './classrooms/editrecords/editrecords.component';
 import { AddrecordsComponent } from './offices/addrecords/addrecords.component';
 
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { ViewRecordComponent } from './classrooms/view-record/view-record.component';
+import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     OfficesComponent,
     ClassrecordsComponent,
     EditrecordsComponent,
-    AddrecordsComponent
+    AddrecordsComponent,
+    ViewRecordComponent
   ],
   imports: [
     BrowserModule,
@@ -59,8 +61,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
       preventDuplicates: true,
     }),
     NgxPaginationModule,  // NGX pagination module
-    OwlDateTimeModule,
-    OwlNativeDateTimeModule,
+    NgbDatepickerModule,
+    NgbTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

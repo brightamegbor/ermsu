@@ -5,5 +5,4 @@ export interface Classroom {
     className: string;
     startTime: string;
     endTime: string;
-    status: string;
  }

@@ -30,7 +30,7 @@ export class StudentsListComponent implements OnInit {
     s.snapshotChanges().subscribe(data => { // Using snapshotChanges() method to retrieve list of data along with metadata($key)
       this.Student = [];
       data.forEach(item => {
-        let a = item.payload.toJSON(); 
+        let a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Student.push(a as Student);
       })
@@ -38,7 +38,7 @@ export class StudentsListComponent implements OnInit {
   }
 
   // Using valueChanges() method to fetch simple list of students data. It updates the state of hideWhenNoStudent, noData & preLoader variables when any changes occurs in student data list in real-time.
-  dataState() {     
+  dataState() {
     this.crudApi.GetStudentsList().valueChanges().subscribe(data => {
       this.preLoader = false;
       if(data.length <= 0){
