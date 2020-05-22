@@ -27,8 +27,9 @@ export class EditrecordsComponent implements OnInit {
     this.updateClassRecordData();   // Call updateStudentData() as soon as the component is ready 
     const id = this.actRoute.snapshot.paramMap.get('id');  // Getting current component's id or information using ActivatedRoute service
     this.crudApi.GetClassrecord(id).valueChanges().subscribe(data => {
+      console.log(data);
       this.editForm.setValue(data)  // Using SetValue() method, It's a ReactiveForm's API to store intial value of reactive form 
-    })
+    });
   }
 
   // Accessing form control using getters
@@ -44,12 +45,12 @@ export class EditrecordsComponent implements OnInit {
     return this.editForm.get('className');
   }
 
-  get startTime() {
-    return this.editForm.get('startTime');
+  get startDate() {
+    return this.editForm.get('startDate');
   }
 
-  get endTime() {
-    return this.editForm.get('endTime');
+  get endDate() {
+    return this.editForm.get('endDate');
   }
 
   // Contains Reactive Form logic
@@ -58,8 +59,8 @@ export class EditrecordsComponent implements OnInit {
       index: ['', [Validators.required, Validators.minLength(12)]],
       studentName: ['', [Validators.required, Validators.minLength(2)]],
       className: ['', [Validators.required]],
-      startTime: ['', [Validators.required]],
-      endTime: ['']
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]]
     });
   }
 

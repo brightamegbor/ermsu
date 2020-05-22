@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Edit Personel Details</h1>
+    <h1 class="h2">Edit Classroom Record</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
       <div class="btn-group">
         <!-- goBack() methos to back to previous component -->
@@ -17,33 +17,48 @@
             <div class="col-lg-5 col-md-12 col-sm-12">
               <div class="row">
                 <div class="col-md-12 mb-3">
-                  <label>First name</label>
-                  <input type="text" formControlName="firstName" class="form-control" required>
-                  <p *ngIf="firstName.touched && firstName.invalid" class="error"><sup>*</sup>Please enter first name</p>
-                  <p *ngIf="firstName.errors?.minlength" class="error"><sup>*</sup>Name shouldn't be less than 2 words</p>
+                  <label>Select Class</label>
+                  <input type="text" formControlName="className" class="form-control" disabled />
+                  <p *ngIf="className.touched && className.invalid" class="error"><sup>*</sup>Please enter class name</p>
                 </div>
-                <div class="col-md-12 mb-3">
-                  <label>Last name</label>
-                  <input type="text" formControlName="lastName" class="form-control">
-                </div>
+
+               <div class="col-md-12 mb-3">
+                <label>Student ID</label>
+                <input type="text" formControlName="index" class="form-control" required />
+                <!-- Showing errors using getter method -->
+                <p *ngIf="index.touched && index.invalid" class="error"><sup>*</sup>Please enter index number</p>
+                <p *ngIf="index.errors?.minlength" class="error"><sup>*</sup>ID shouldn't be less than 12 words</p>
               </div>
-              <div class="row">
-                <div class="col-md-12 mb-3">
-                  <label>Email</label>
-                  <input type="email" formControlName="email" class="form-control" required>
-                  <p *ngIf="email.touched && email.invalid" class="error"><sup>*</sup>Please provide email</p>
-                  <p *ngIf="email.errors?.pattern" class="error"><sup>*</sup>Please enter correct email</p>
-                </div>
-                <div class="col-md-12 mb-3">
-                  <label>Mobile number</label>
-                  <input type="text" formControlName="mobileNumber" class="form-control" required>
-                  <p *ngIf="mobileNumber.touched && mobileNumber.invalid" class="error"><sup>*</sup>Please provide
-                    contact
-                    number</p>
-                  <p *ngIf="mobileNumber.errors?.pattern" class="error"><sup>*</sup>Use numbers only
-                    number</p>
-                </div>
+      
+              <div class="col-md-12 mb-3">
+                <label>Student name</label>
+                <input type="text" formControlName="studentName" class="form-control" />
               </div>
+      
+            </div>
+      
+            <div class="row">
+      
+              <div class="col-md-12 mb-3">
+                <label>Time (took)</label>
+                <input type="text" formControlName="startDate" class="form-control" disabled />
+                
+            <!-- Showing errors using getter method -->
+                <!-- <p *ngIf="programme.touched && firstName.invalid" class="error"><sup>*</sup>Please enter atleast a programme</p>
+                <p *ngIf="programme.errors?.minlength" class="error"><sup>*</sup>Programme shouldn't be less than 2 words</p> -->
+              </div>
+      
+              <div class="col-md-12 mb-3">
+                <label>Time (returned)</label>
+                <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" formControlName="endDate" placeholder="pick a date" class="form-control" />
+                <owl-date-time #dt2></owl-date-time>
+            <!-- Showing errors using getter method -->
+                <!-- <p *ngIf="programme.touched && firstName.invalid" class="error"><sup>*</sup>Please enter atleast a programme</p>
+                <p *ngIf="programme.errors?.minlength" class="error"><sup>*</sup>Programme shouldn't be less than 2 words</p> -->
+              </div>
+      
+            </div>
+
               <div class="form-group text-right">
                 <button type="submit" class="btn btn-success btn-block" [disabled]="!editForm.valid">Update Student</button>
               </div>

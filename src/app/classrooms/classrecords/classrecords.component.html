@@ -1,5 +1,11 @@
-<div class="pt-3 pb-2 mb-3 border-bottom">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Add New Record</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group">
+        <!-- goBack() methos to back to previous component -->
+        <button class="btn btn-sm btn-outline-secondary" (click)="goBack()">Go Back</button>
+      </div>
+    </div>
   </div>
   
   <!-- Student form -->
@@ -10,16 +16,17 @@
   
           <div class="col-md-12 mb-3">
             <label>Select Class</label>
-            <select formControlName="className" class="form-control" required>
+            <select (change)="changeClass($event)" formControlName="className" class="custom-select" required>
+              <option value="" disabled>Choose a class</option>
               <option
                 *ngFor="let classroom of Classroom" 
-                [value]="classroom.className">{{classroom.className}}</option>
+                [ngValue]="classroom.className">{{classroom.className}}</option>
             </select>
           </div>
   
           <div class="col-md-12 mb-3">
             <label>Student ID</label>
-            <input type="text" formControlName="index" class="form-control" required>
+            <input type="text" formControlName="index" class="form-control" placeholder="enter index number" required>
             <!-- Showing errors using getter method -->
             <p *ngIf="index.touched && index.invalid" class="error"><sup>*</sup>Please enter index number</p>
             <p *ngIf="index.errors?.minlength" class="error"><sup>*</sup>ID shouldn't be less than 12 words</p>
@@ -27,7 +34,7 @@
   
           <div class="col-md-12 mb-3">
             <label>Student name</label>
-            <input type="text" formControlName="studentName" class="form-control">
+            <input type="text" formControlName="studentName" class="form-control" placeholder="enter name">
           </div>
   
         </div>
@@ -36,8 +43,8 @@
   
           <div class="col-md-12 mb-3">
             <label>Time (took)</label>
-            <input ngbDatepicker (click)="datePicker.toggle()" #datePicker="ngbDatepicker" formControlName="startDate" placeholder="pick a date" class="form-control">
-            <ngb-timepicker formControlName="startTime" meridian="meridian"></ngb-timepicker>
+            <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" formControlName="startDate" placeholder="pick a date" class="form-control">
+            <owl-date-time #dt1></owl-date-time>
             <!-- Showing errors using getter method -->
             <!-- <p *ngIf="programme.touched && firstName.invalid" class="error"><sup>*</sup>Please enter atleast a programme</p>
             <p *ngIf="programme.errors?.minlength" class="error"><sup>*</sup>Programme shouldn't be less than 2 words</p> -->
@@ -45,8 +52,8 @@
   
           <div class="col-md-12 mb-3">
             <label>Time (returned)</label>
-            <input formControlName="endTime" placeholder="pick a date" class="form-control">
-            
+            <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" formControlName="endDate" placeholder="pick a date" class="form-control">
+            <owl-date-time #dt2></owl-date-time>
             <!-- Showing errors using getter method -->
             <!-- <p *ngIf="programme.touched && firstName.invalid" class="error"><sup>*</sup>Please enter atleast a programme</p>
             <p *ngIf="programme.errors?.minlength" class="error"><sup>*</sup>Programme shouldn't be less than 2 words</p> -->
@@ -56,7 +63,7 @@
   
   
         <div class="form-group text-right">
-          <button type="button" class="btn btn-secondary gap-right" (click)="ResetForm()">Reset</button>
+          <button type="button" class="btn btn-danger gap-right" (click)="ResetForm()">Reset</button>
           <button type="submit" class="btn btn-success" [disabled]="!newClassroomsForm.valid">Add Record</button>
         </div>
   

@@ -3,6 +3,8 @@ export interface Classroom {
     index: string;
     studentName: string;
     className: string;
-    startTime: string;
-    endTime: string;
+    startDate: any;
+    endDate: any;
+    // startTime: any;
+    // endTime: any;
  }

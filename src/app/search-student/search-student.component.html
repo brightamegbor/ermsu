@@ -1,0 +1,73 @@
+<div class="pt-3 pb-2 mb-3 border-bottom">
+    <form [formGroup]="searchStudent" (ngSubmit)="submitStudentData()" novalidate>
+        <div class="row">
+            <div class="col-lg-5 col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="col-11">
+                        <input formControlName="index" type="text" class="form-control pr-5" placeholder="enter student index number..." required> 
+                    </div>
+
+                    <div class="col-1 form-group text-right p-0 custom-searchbtn">
+                        <button
+                         type="submit" 
+                         class="btn"
+                         [disabled]="!searchStudent.valid"><i class="fas fa-search custom-fa-search"></i></button>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="no-data text-center" *ngIf="preLoader">
+    <img src="assets/preloader.gif" class="preloader-icon" alt="No student">
+</div>
+
+<div class="no-data text-center" *ngIf="noData">
+    <img src="assets/no-student.svg" class="nodata-msg" alt="No student">
+    <p class="nodata-msg">No student found!</p>
+</div>
+<div *ngIf="hideWhenNoStudent" class="card result-card" style="width: 17.3rem;">
+    <div class="card-header text-center text-wrap">
+        <strong>KOFORIDUA TECHNICAL UNIVERSITY</strong>
+      </div>
+    <div *ngFor="let student of Student" class="card-body">
+        <!-- <div class="row"> -->
+            <!-- <div class="col-8"> -->
+                <div class="text-uppercase border-bottom mb-2">
+                    <strong>
+                        {{student.lastName}}, {{student.firstName}}
+                    </strong>
+                </div>
+        
+                <div class="border-bottom">
+                    <p class="small mb-0">Programme:</p>  
+                    <p class="text-uppercase"><strong>{{student.programme}}</strong></p> 
+                </div>
+        
+                <div class="border-bottom row">
+                    <div class="col-8">
+                        <p class="small mb-0">Index number:</p>  
+                        <p><strong>{{student.index}}</strong></p> 
+                    </div>
+                    
+                    <div class="col-4">
+                        <p class="small mb-0">Level:</p> 
+                       <p><strong>{{student.level}}</strong></p>
+                    </div>
+                </div>
+            <!-- </div> -->
+
+            <!-- <div class="col-4"> -->
+                <div class="mt-1 pt-0 text-center">
+                    <img src="{{student.photo}}" width="150" height="150">
+                </div>
+            <!-- </div> -->
+        <!-- </div> -->
+        
+        
+        
+    </div>
+</div>

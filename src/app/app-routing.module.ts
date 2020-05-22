@@ -14,12 +14,14 @@ import { OfficesComponent } from './offices/offices.component';
 import { ClassrecordsComponent } from './classrooms/classrecords/classrecords.component';
 import { EditrecordsComponent } from './classrooms/editrecords/editrecords.component';
 import { AddrecordsComponent } from './offices/addrecords/addrecords.component';
+import { SearchStudentComponent } from './search-student/search-student.component';
 
 // Routes array define component along with the path name for url
 const routes: Routes = [
-  { path: '', redirectTo: '/register-student', pathMatch: 'full' },
+  { path: '', redirectTo: '/view-students', pathMatch: 'full' },
   { path: 'register-student', component: AddStudentComponent },
   { path: 'view-students', component: StudentsListComponent },
+  { path: 'search-student', component: SearchStudentComponent },
   { path: 'view-offices', component: OfficesComponent },
   { path: 'edit-student/:id', component: EditStudentComponent },
   { path: 'view-classrooms', component: ClassroomsComponent },

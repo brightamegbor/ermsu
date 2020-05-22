@@ -17,6 +17,10 @@
           <div class="col-lg-5 col-md-12 col-sm-12">
             <div class="row">
               <div class="col-md-12 mb-3">
+                <label>Student ID</label>
+                <input type="text" formControlName="index" class="form-control" disabled>
+              </div>
+              <div class="col-md-12 mb-3">
                 <label>First name</label>
                 <input type="text" formControlName="firstName" class="form-control" required>
                 <p *ngIf="firstName.touched && firstName.invalid" class="error"><sup>*</sup>Please enter first name</p>
@@ -24,7 +28,7 @@
               </div>
               <div class="col-md-12 mb-3">
                 <label>Last name</label>
-                <input type="text" formControlName="lastName" class="form-control">
+                <input type="text" formControlName="lastName" class="form-control" required>
               </div>
             </div>
             <div class="row">

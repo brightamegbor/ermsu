@@ -2,7 +2,7 @@
     <h1 class="h2">Classrooms Records</h1>
     <!-- It won't show if there is no student data -->
     <a routerLink="/add-classrecords" class="btn btn-success">
-      <i class="fas fa-search custom-fa-search"></i>
+      <i class="fas fa-plus custom-fa-plus"></i>
       Add Record
     </a>
 
@@ -34,7 +34,6 @@
       <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
         <thead>
           <tr>
-            <th scope="col">Record Id</th>
             <th scope="col">Student ID</th>
             <th scope="col">Student Name</th>
             <th scope="col">Class Name</th>
@@ -47,16 +46,22 @@
           <!-- *ngFor loop iterates over Student array and fetch the student's data -->
           <!-- paginate pipe will add pagination in student's list, it won't show if items are less then 7 -->
           <tr *ngFor="let classroom of Classroom | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
-            <th scope="row">{{classroom.$key}}</th>
             <td>{{classroom.index}}</td>
             <td>{{classroom.studentName}}</td>
             <td>{{classroom.className}}</td>
-            <td>{{classroom.startTime}}</td>
-            <td>{{classroom.endTime}}</td>
-            <td class="text-center action-block">
-              <i class="fas fa-plus" routerLink="/edit-classrecords/{{classroom.$key}}"></i>
-              <!-- <i class="far fa-trash-alt" (click)="deleteStudent(student)"></i> -->
+            <td>
+              {{classroom.startDate | date : 'medium'}}</td>
+            <td>
+              {{classroom.endDate | date : 'medium'}}
+              </td>
+            <td *ngIf="(classroom.endDate).length <=0" class="text-center action-block">
+              <i class="fas fa-edit" routerLink="/edit-classrecords/{{classroom.$key}}"></i>
             </td>
+
+            <td *ngIf="!((classroom.endDate).length <=0)" class="text-center action-block">
+              submitted
+            </td>
+
           </tr>
         </tbody>
       </table>

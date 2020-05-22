@@ -13,6 +13,8 @@ export class CrudService {
   studentsRef: AngularFireList<any>;    // Reference to Student data list, its an Observable
   studentRef: AngularFireObject<any>;   // Reference to Student object, its an Observable too
 
+  studentSearchRef: AngularFireList<any>;
+
   classroomsRef: AngularFireList<any>;
   classroomRef: AngularFireObject<any>;
 
@@ -42,6 +44,12 @@ export class CrudService {
     this.studentRef = this.db.object('students-list/' + id);
     return this.studentRef;
   }
+// search for student using index number
+  SearchStudent(index: string) {
+    this.studentSearchRef = this.db.list('students-list', ref =>
+    ref.orderByChild('index').equalTo(index));
+    return this.studentSearchRef;
+  }
 
   // Fetch Students List
   GetStudentsList() {
@@ -70,8 +78,10 @@ export class CrudService {
       index: classroom.index,
       studentName: classroom.studentName,
       className: classroom.className,
-      startTime: classroom.startTime,
-      endTime: classroom.endTime
+      startDate: classroom.startDate.getTime(),
+      endDate: classroom.endDate,
+      // startTime: classroom.startTime,
+      // endTime: classroom.endTime
     });
   }
 
@@ -103,8 +113,10 @@ export class CrudService {
       index: classroom.index,
       studentName: classroom.studentName,
       className: classroom.className,
-      startTime: classroom.startTime,
-      endTime: classroom.endTime
+      startDate: classroom.startDate,
+      endDate: classroom.endDate.getTime(),
+      // startTime: classroom.startTime,
+      // endTime: classroom.endTime
     });
   }
 

@@ -2,7 +2,7 @@
     <h1 class="h2">Classrooms</h1>
     <!-- It won't show if there is no student data -->
     <a routerLink="/add-classrecords" class="btn btn-success">
-      <i class="fas fa-search custom-fa-search"></i>
+      <i class="fas fa-plus custom-fa-plus"></i>
       Add Record
     </a>
 
@@ -53,7 +53,7 @@
             <td>{{classroom.className}}</td>
             <td>{{classroom.classBlock}}</td>
             <td class="text-center action-block">
-              <i class="fas fa-plus" routerLink="/add-classrecords/{{classroom.$key}}"></i>
+              <i class="fas fa-plus" routerLink="/add-classrecords"></i>
               <!-- <i class="far fa-trash-alt" (click)="deleteStudent(student)"></i> -->
             </td>
           </tr>

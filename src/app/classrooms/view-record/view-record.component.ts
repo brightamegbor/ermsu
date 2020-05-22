@@ -15,7 +15,7 @@ export class ViewRecordComponent implements OnInit {
   hideWhenNoClassroom: boolean = false; // Hide students data table when no student.
   noData: boolean = false;            // Showing No Student Message, when no student in database.
   preLoader: boolean = true;          // Showing Preloader to show user data is coming for you from thre server(A tiny UX Shit)
-
+  sDate: Classroom[];
 
   constructor(
     public crudApi: CrudService, // Inject student CRUD services in constructor.
@@ -32,6 +32,8 @@ export class ViewRecordComponent implements OnInit {
         let a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Classroom.push(a as Classroom);
+        let startDate = item.payload.toJSON['startDate'];
+        this.sDate = startDate;
       });
     });
   }
@@ -40,6 +42,7 @@ export class ViewRecordComponent implements OnInit {
   dataState() {
     this.crudApi.GetClassRecordsList().valueChanges().subscribe(data => {
       this.preLoader = false;
+      console.log(data);
       if (data.length <= 0) {
         this.hideWhenNoClassroom = false;
         this.noData = true;
