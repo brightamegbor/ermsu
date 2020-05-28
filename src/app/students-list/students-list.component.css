@@ -1,0 +1,14 @@
+.studentTable-container {
+    /* height: 600px !important; */
+    overflow: auto !important;
+  }
+  
+  table {
+    width: 100% !important;
+  }
+
+  td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+      padding: 1rem !important;
+  }
+
+  

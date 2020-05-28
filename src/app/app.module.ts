@@ -28,12 +28,16 @@ import { AppComponent } from './app.component';
 import { ClassroomsComponent } from './classrooms/classrooms.component';
 import { OfficesComponent } from './offices/offices.component';
 import { ClassrecordsComponent } from './classrooms/classrecords/classrecords.component';
-import { EditrecordsComponent } from './classrooms/editrecords/editrecords.component';
+import { EditrecordsComponent, ConfirmationDialogComponent } from './classrooms/editrecords/editrecords.component';
 import { AddrecordsComponent } from './offices/addrecords/addrecords.component';
 
 import { ViewRecordComponent } from './classrooms/view-record/view-record.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { SearchStudentComponent } from './search-student/search-student.component';
+import { MaterialModule } from './material.module';
+// import { MatTableModule } from '@angular/material/table';
+// import { MatPaginatorModule } from '@angular/material/paginator';
+// import { MatSortModule } from '@angular/material';
 
 
 @NgModule({
@@ -48,12 +52,13 @@ import { SearchStudentComponent } from './search-student/search-student.componen
     EditrecordsComponent,
     AddrecordsComponent,
     ViewRecordComponent,
-    SearchStudentComponent
+    SearchStudentComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase), // Main Angular fire module 
-    AngularFireDatabaseModule,  // Firebase database module 
+    AngularFireModule.initializeApp(environment.firebase), // Main Angular fire module
+    AngularFireDatabaseModule,  // Firebase database module
     ReactiveFormsModule,        // Reactive forms module
     AppRoutingModule,           // Main routing module
     BrowserAnimationsModule,    // Required animations module for Toastr
@@ -64,7 +69,11 @@ import { SearchStudentComponent } from './search-student/search-student.componen
     }),
     NgxPaginationModule,  // NGX pagination module
     OwlDateTimeModule,
-    OwlNativeDateTimeModule
+    OwlNativeDateTimeModule,
+    MaterialModule
+  ],
+  entryComponents: [
+    ConfirmationDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

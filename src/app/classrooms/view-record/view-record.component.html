@@ -6,6 +6,7 @@
       Add Record
     </a>
 
+    <button class="btn btn-sm btn-outline-secondary" (click)="goBack()">Go Back</button>
     <!-- <a routerLink="/register-student" class="btn btn-success">
         <i class="fas fa-search custom-fa-search"></i>
         Add Key Record
@@ -52,6 +53,7 @@
             <td>
               {{classroom.startDate | date : 'medium'}}</td>
             <td>
+              <span *ngIf="classroom.endDate.length <= 0" style="color: rgb(233, 14, 32);">pending</span>
               {{classroom.endDate | date : 'medium'}}
               </td>
             <td *ngIf="(classroom.endDate).length <=0" class="text-center action-block">

@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CrudService } from '../../shared/crud.service';  // CRUD API service class
 import { ToastrService } from 'ngx-toastr';      // Alert message using NGX toastr
 import { Classroom } from '../../shared/classroom';
+import { Location } from '@angular/common'; 
 
 @Component({
   selector: 'app-view-record',
@@ -18,6 +19,7 @@ export class ViewRecordComponent implements OnInit {
   sDate: Classroom[];
 
   constructor(
+    private location: Location,
     public crudApi: CrudService, // Inject student CRUD services in constructor.
     public toastr: ToastrService // Toastr service for alert message
     ){ }
@@ -37,12 +39,15 @@ export class ViewRecordComponent implements OnInit {
       });
     });
   }
+  goBack() {
+    this.location.back();
+  }
 
   // Using valueChanges() method to fetch simple list of students data. It updates the state of hideWhenNoStudent, noData & preLoader variables when any changes occurs in student data list in real-time.
   dataState() {
     this.crudApi.GetClassRecordsList().valueChanges().subscribe(data => {
       this.preLoader = false;
-      console.log(data);
+      // console.log(data);
       if (data.length <= 0) {
         this.hideWhenNoClassroom = false;
         this.noData = true;

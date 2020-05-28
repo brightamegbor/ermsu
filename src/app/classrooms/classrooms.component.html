@@ -42,7 +42,7 @@
             <th scope="col">Classroom Id</th>
             <th scope="col">Classroom Name</th>
             <th scope="col">Classroom Block</th>
-            <th class="text-center" scope="col">Add Record</th>
+            <th class="text-center" scope="col">Status</th>
           </tr>
         </thead>
         <tbody>
@@ -53,7 +53,8 @@
             <td>{{classroom.className}}</td>
             <td>{{classroom.classBlock}}</td>
             <td class="text-center action-block">
-              <i class="fas fa-plus" routerLink="/add-classrecords"></i>
+              <span *ngIf="classroom.status === 'free'" style="color: green;">{{classroom.status}}</span>
+              <span *ngIf="classroom.status === 'occupied'" style="color: coral;">{{classroom.status}}</span>
               <!-- <i class="far fa-trash-alt" (click)="deleteStudent(student)"></i> -->
             </td>
           </tr>
@@ -61,6 +62,6 @@
       </table>
     </div>
     <!-- Pagination -->
-    <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true"></pagination-controls>
+    <pagination-controls (pageChange)="p = $event" autoHide="false" responsive="true"></pagination-controls>
   
   </div>

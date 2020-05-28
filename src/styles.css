@@ -1,7 +1,10 @@
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 
-body{font-size:.875rem;font-family:'Poppins', sans-serif;}
+body{font-size:.875rem;  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 .feather{width:16px;height:16px;vertical-align:text-bottom;}
+
+html, body { height: 100%; }
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 
 /* * Sidebar */
 .sidebar{position:fixed;top:0;bottom:0;left:0;z-index:100;/* Behind the navbar */
@@ -94,3 +97,9 @@ footer {width: 100%;text-align: center;padding-bottom: 25px;border-top: 1px soli
  .sidebar {padding: 40px 0 15px;}
  footer br { display: none; }
 }
+
+
+.studentTable-container th, .mat-sort-header-button {
+    text-transform: uppercase !important;
+  }
+

@@ -53,7 +53,8 @@ export class CrudService {
 
   // Fetch Students List
   GetStudentsList() {
-    this.studentsRef = this.db.list('students-list');
+    this.studentsRef = this.db.list('students-list', ref =>
+    ref.orderByChild('firstName'));
     return this.studentsRef;
   }
 
@@ -97,6 +98,12 @@ export class CrudService {
     return this.classroomsRef;
   }
 
+  GetClassroomsInput(status: string) {
+    let newClassroomsRef = this.db.list('classrooms-list', ref =>
+    ref.orderByChild('status').equalTo(status));
+    return newClassroomsRef;
+  }
+
   GetClassroom(id: string) {
     this.classroomRef = this.db.object('classrooms-list/' + id);
     return this.classroomRef;
@@ -120,9 +127,10 @@ export class CrudService {
     });
   }
 
-  UpdateClassRoom(classroom: Classroom) {
-  this.classroomRef.update({
-    status: 'occupied'
+  UpdateClassRoom(id: string, status: string) {
+    const newClass = this.db.object('classrooms-list/' + id);
+    newClass.update({
+    status: status,
   });
 }
 

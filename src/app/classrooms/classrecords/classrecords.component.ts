@@ -29,7 +29,7 @@ export class ClassrecordsComponent implements OnInit {
     this.newClassroomForm();              // Call student form when component is ready
 
     this.dataState(); // Initialize student's list, when component is ready
-    let s = this.crudApi.GetClassroomsList();
+    let s = this.crudApi.GetClassroomsInput('free');
     s.snapshotChanges().subscribe(data => { // Using snapshotChanges() method to retrieve list of data along with metadata($key)
       this.Classroom = [];
       data.forEach(item => {
@@ -37,6 +37,7 @@ export class ClassrecordsComponent implements OnInit {
         a['$key'] = item.key;
         this.Classroom.push(a as Classroom);
       });
+      console.log(this.Classroom);
     });
   }
 
@@ -109,11 +110,18 @@ export class ClassrecordsComponent implements OnInit {
 
   submitClassroomData() {
     console.log(this.newClassroomsForm.value);
+    let id = this.newClassroomsForm.value.className;
+    console.log('id >>>>>', id);
+
+    this.crudApi.UpdateClassRoom(
+      id, 'occupied'
+    );
+
     this.crudApi.AddClassRecord(this.newClassroomsForm.value); // Submit classroom data using CRUD API
     this.toastr.success(
       this.newClassroomsForm
       .controls['className'].value + ' record successfully added!'); // Show success message when data is successfully submited
-    // this.crudApi.UpdateClassRoom(id);
+
     this.ResetForm2();  // Reset form when clicked on reset button
    }
 

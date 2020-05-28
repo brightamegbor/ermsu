@@ -17,10 +17,12 @@
           <div class="col-md-12 mb-3">
             <label>Select Class</label>
             <select (change)="changeClass($event)" formControlName="className" class="custom-select" required>
-              <option value="" disabled>Choose a class</option>
+              <option value="" disabled><span>Choose a class</span> </option>
+              <!-- <option value="" disabled *ngIf="classroom.$key.length <= 0">No class available</option> -->
               <option
                 *ngFor="let classroom of Classroom" 
-                [ngValue]="classroom.className">{{classroom.className}}</option>
+                [value]="classroom.$key">
+                {{classroom.$key}}</option>
             </select>
           </div>
   
@@ -34,7 +36,8 @@
   
           <div class="col-md-12 mb-3">
             <label>Student name</label>
-            <input type="text" formControlName="studentName" class="form-control" placeholder="enter name">
+            <input type="text" pattern="[a-zA-Z]+" ng-pattern-restrict formControlName="studentName" class="form-control" placeholder="enter name">
+            <p *ngIf="studentName.touched && studentName.invalid" class="error"><sup>*</sup>Please enter correct name spellings</p>
           </div>
   
         </div>

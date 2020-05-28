@@ -1,0 +1,7 @@
+{
+    "powermode.enabled": true,
+    "powermode.enableShake": false,
+    "powermode.enableStatusBarComboCounter": false,
+    "htmlhint.enable": false,
+    "powermode.enableStatusBarComboTimer": false
+}

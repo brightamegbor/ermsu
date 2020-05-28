@@ -1,22 +1,23 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+>
   <h1 class="h2">Students List</h1>
   <!-- It won't show if there is no student data -->
   <a routerLink="/search-student" class="btn btn-success">
     <i class="fas fa-search custom-fa-search"></i>
     Search Student
-  </a> 
+  </a>
 </div>
 
 <div class="pricing-header mx-auto">
-
   <!-- Preloader shows before the data loads-->
   <div class="no-data text-center" *ngIf="preLoader">
-    <img src="assets/preloader.gif" class="preloader-icon" alt="No student">
+    <img src="assets/preloader.gif" class="preloader-icon" alt="No student" />
   </div>
 
   <!-- No data shows when their is no student data available -->
   <div class="no-data text-center" *ngIf="noData">
-    <img src="assets/no-student.svg" class="nodata-msg" alt="No student">
+    <img src="assets/no-student.svg" class="nodata-msg" alt="No student" />
     <p class="nodata-msg">No student added yet!</p>
     <a routerLink="/register-student" class="btn btn-success">
       <i class="fas fa-plus custom-fa-plus"></i>
@@ -25,44 +26,95 @@
   </div>
 
   <!-- Showing students data -->
-  <div class="table-responsive" *ngIf="hideWhenNoStudent">
-    <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
-      <thead>
-        <tr>
-          <th scope="col">Student Id</th>
-          <th scope="col">Student index</th>
-          <th scope="col">Student name</th>
-          <th scope="col">Student programme</th>
-          <th scope="col">Student level</th>
-          <th scope="col">Student session</th>
-          <th scope="col">Email</th>
-          <th scope="col">Mobile number</th>
-          <th scope="col">Student photo</th>
-          <th class="text-center" scope="col">Edit</th>
-        </tr>
-      </thead>
-      <tbody>
+      <!-- class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg" -->
+  <div class="studentTable-container" *ngIf="hideWhenNoStudent">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      matSort
+    >
+      <!-- <thead>
+        <tr> -->
+      <!-- <ng-container matColumnDef="$key">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let student" scope="row">{{ student.$key }}</td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="index" sticky>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Student index</th>
+        <td mat-cell *matCellDef="let student">{{ student.index }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="studname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Student name</th>
+        <td mat-cell *matCellDef="let student">{{ student.firstName }} {{ student.lastName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="programme">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Student programme</th>
+        <td mat-cell *matCellDef="let student">{{ student.programme }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="level">
+        <th mat-header-cell *matHeaderCellDef >Student level</th>
+        <td mat-cell *matCellDef="let student">{{ student.level }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="session">
+        <th mat-header-cell *matHeaderCellDef >Student session</th>
+        <td mat-cell *matCellDef="let student">{{ student.session }}</td>
+      </ng-container>
+      
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef >Email</th>
+        <td mat-cell *matCellDef="let student">{{ student.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="mobileNumber">
+        <th mat-header-cell *matHeaderCellDef >Mobile number</th>
+        <td mat-cell *matCellDef="let student">{{ student.mobileNumber }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="photo">
+        <th mat-header-cell *matHeaderCellDef >Student photo</th>
+        <td mat-cell *matCellDef="let student"><img src="{{ student.photo }}" width="50" height="50" /></td>
+      </ng-container>
+      
+      
+      <!-- <th class="text-center" >Edit</th> -->
+      <!-- </tr>
+      </thead> -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         <!-- *ngFor loop iterates over Student array and fetch the student's data -->
         <!-- paginate pipe will add pagination in student's list, it won't show if items are less then 7 -->
-        <tr *ngFor="let student of Student | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
-          <th scope="row">{{student.$key}}</th>
-          <td>{{student.index}}</td>
-          <td>{{student.firstName}} {{student.lastName}}</td>
-          <td>{{student.programme}}</td>
-          <td>{{student.level}}</td>
-          <td>{{student.session}}</td>
-          <td>{{student.email}}</td>
-          <td>{{student.mobileNumber}}</td>
-          <td><img src="{{student.photo}}" width="50" height="50"></td>
-          <td class="text-center action-block">
+        <!-- <tr
+          *ngFor="
+            let student of Student
+              | paginate: { itemsPerPage: 7, currentPage: p };
+            let i = index
+          "
+        > -->
+          
+          
+          <!-- <td  mat-cell *matCellDef="let student" class="text-center action-block">
             <i class="far fa-edit edit-icon-btn" routerLink="/edit-student/{{student.$key}}"></i>
-            <!-- <i class="far fa-trash-alt" (click)="deleteStudent(student)"></i> -->
-          </td>
-        </tr>
-      </tbody>
+            <i class="far fa-trash-alt" (click)="deleteStudent(student)"></i>
+          </td> -->
+        <!-- </tr> -->
+      <!-- </tbody> -->
     </table>
+    
+    <mat-paginator
+    [pageSizeOptions]="[5, 10, 20, 30, 50]"
+    showFirstLastButtons
+    ></mat-paginator>
   </div>
   <!-- Pagination -->
-  <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true"></pagination-controls>
-
+  <!-- <pagination-controls
+    (pageChange)="p = $event"
+    autoHide="false"
+    responsive="true"
+  ></pagination-controls> -->
 </div>
