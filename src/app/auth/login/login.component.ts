@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
       .catch((error) => {
         // window.alert(error.message);
         this.errorBol = true;
-        this.errorMSG = error.message;
+        this.errorMSG =
+          "There is no user record corresponding to this credentials. Please contact admin for assistance";
       });
   }
 

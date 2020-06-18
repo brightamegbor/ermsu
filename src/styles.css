@@ -20,7 +20,9 @@ body {
 
 /* * Sidebar */
 .sidebar {
-  position: fixed;
+  /* position: fixed; */
+  display: flex;
+  /* width: 300px; */
   top: 0;
   bottom: 0;
   left: 0;
@@ -104,7 +106,7 @@ body {
   font-size: 14px;
 }
 .bg-dark {
-  background-color: #1633ff !important;
+  background-color: #3f51b5 !important;
 }
 .gap-right {
   margin-right: 10px;
