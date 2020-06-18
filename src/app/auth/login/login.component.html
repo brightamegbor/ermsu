@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="align-middle">
+    <!-- <h4 class="">Welcome! Please Sign in to continue</h4> -->
+    <div class="authBlock">
+      <h3 class="text-center mb-4">Sign In</h3>
+      <div class="formGroup">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            type="text"
+            class="formControl"
+            placeholder="username@example.com"
+            #email
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="formGroup">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            type="password"
+            class="formControl"
+            placeholder="Password"
+            #password
+            required
+          />
+        </mat-form-field>
+      </div>
+      <!-- Calling SignIn Api from AuthenticationService -->
+      <div class="formGroup">
+        <button
+          style="width: 100%;"
+          mat-raised-button
+          type="button"
+          class="btn btnPrimary"
+          color="primary"
+          (click)="SignIn(email.value, password.value)"
+        >
+          Log in
+        </button>
+      </div>
+      <p
+        *ngIf="errorBol"
+        style="color: red; word-wrap: break-word;"
+        class="mt-3"
+      >
+        {{ errorMSG }}
+      </p>
+    </div>
+  </div>
+</div>

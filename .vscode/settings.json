@@ -3,5 +3,8 @@
     "powermode.enableShake": false,
     "powermode.enableStatusBarComboCounter": false,
     "htmlhint.enable": false,
-    "powermode.enableStatusBarComboTimer": false
+    "powermode.enableStatusBarComboTimer": false,
+    "editor.fontSize": 16,
+    "prettier.jsxSingleQuote": true,
+    "prettier.singleQuote": true
 }

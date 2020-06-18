@@ -1,0 +1,25 @@
+.align-items-center {
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+.d-flex {
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.align-middle {
+  display: flex !important;
+  height: 100vh !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.authBlock,
+.authBlock .mat-form-field {
+  width: 80vw;
+  transition: all 0.2s;
+}
+
+input {
+  background-color: transparent !important;
+}

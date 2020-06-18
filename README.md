@@ -1,16 +1,19 @@
 # AngularFirebaseStudentDemoApp
 
-A demo CRUD app for student record management system built with Angular 7 and Firebase 5 Real-time NoSQL cloud daatabase. 
+A demo CRUD app for student record management system built with Angular 7 and Firebase 5 Real-time NoSQL cloud daatabase.
 
 ## How to Run Project
+
 - Add Firebase config details in src/environments/environment.prod.ts
 - Add Firebase config details in src/environments/environment.ts
 - Run `npm install` to install required dependencies.
 
 ## Step by Step Article
-[Angular 7 Firebase5 CRUD Operations with Reactive Forms](https://www.positronx.io/angular-7-firebase-5-crud-operations-with-reactive-forms)
+
+[Angular 7 Firebase5 CRUD Operations with Reactive Forms]
 
 ## Built with
+
 ```
 {
   "name": "angularfirebase-student-app",
@@ -68,5 +71,3 @@ A demo CRUD app for student record management system built with Angular 7 and Fi
   }
 }
 ```
-
-[Visit positronX.io for Advanced Full Stack Tutorials](https://www.positronx.io/)
