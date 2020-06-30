@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { CrudService } from "../shared/crud.service";
 import { ToastrService } from "ngx-toastr";
 import { Office } from "../shared/office";
+import { MatSort, MatPaginator, MatTableDataSource } from "@angular/material";
 
 @Component({
   selector: "app-offices",
@@ -14,6 +15,14 @@ export class OfficesComponent implements OnInit {
   hideWhenNoOffice: boolean = false; // Hide students data table when no student.
   noData: boolean = false; // Showing No Student Message, when no student in database.
   preLoader: boolean = true;
+
+  displayedColumns = ["Block", "Name", "Staff"];
+
+  dataSource = new MatTableDataSource<Office>();
+
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+
   constructor(
     public crudApi: CrudService, // Inject student CRUD services in constructor.
     public toastr: ToastrService
@@ -30,6 +39,13 @@ export class OfficesComponent implements OnInit {
         a["$key"] = item.key;
         this.Office.push(a as Office);
       });
+
+      this.dataSource.data = this.Office;
+      // console.log(this.dataSource.data);
+      setTimeout(() => {
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }, 300);
     });
   }
 

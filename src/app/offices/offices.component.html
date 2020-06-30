@@ -27,11 +27,71 @@
 
   <!-- Showing students data -->
   <div class="table-responsive" *ngIf="hideWhenNoOffice">
-    <mat-selection-list [multiple]="false">
-      <mat-list-option *ngFor="let office of Office">{{
-        office.officeName
-      }}</mat-list-option>
-    </mat-selection-list>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <!-- <thead>
+        <tr> -->
+      <!-- <ng-container matColumnDef="$key">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let student" scope="row">{{ student.$key }}</td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="Block">
+        <mat-header-cell *matHeaderCellDef>Block</mat-header-cell>
+        <mat-cell *matCellDef="let office">{{ office.officeBlock }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let office">
+          {{ office.officeName }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Staff">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Staff
+        </mat-header-cell>
+        <mat-cell *matCellDef="let office">{{ office.staffName }}</mat-cell>
+      </ng-container>
+
+      <!-- <th class="text-center" >Edit</th> -->
+      <!-- </tr>
+      </thead> -->
+      <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        matRipple
+      ></tr> -->
+      <mat-header-row
+        *matHeaderRowDef="displayedColumns; sticky: true"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        matRipple
+      ></mat-row>
+      <!-- *ngFor loop iterates over Student array and fetch the student's data -->
+      <!-- paginate pipe will add pagination in student's list, it won't show if items are less then 7 -->
+      <!-- <tr
+          *ngFor="
+            let student of Student
+              | paginate: { itemsPerPage: 7, currentPage: p };
+            let i = index
+          "
+        > -->
+
+      <!-- <td  mat-cell *matCellDef="let student" class="text-center action-block">
+            <i class="far fa-edit edit-icon-btn" routerLink="/edit-student/{{student.$key}}"></i>
+            <i class="far fa-trash-alt" (click)="deleteStudent(student)"></i>
+          </td> -->
+      <!-- </tr> -->
+      <!-- </tbody> -->
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20, 30, 50]"
+      showFirstLastButtons
+    ></mat-paginator>
   </div>
   <!-- Pagination -->
   <pagination-controls

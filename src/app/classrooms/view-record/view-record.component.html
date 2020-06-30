@@ -45,10 +45,10 @@
       <thead>
         <tr>
           <th scope="col">Student ID</th>
-          <th scope="col">Student Name</th>
+          <!-- <th scope="col">Student Name</th> -->
           <th scope="col">Class Name</th>
-          <th scope="col">Took Time</th>
-          <th scope="col">Returned Time</th>
+          <!-- <th scope="col">Took Time</th> -->
+          <!-- <th scope="col">Returned Time</th> -->
           <th class="text-center" scope="col">Status</th>
         </tr>
       </thead>
@@ -63,20 +63,20 @@
           "
         >
           <td>{{ classroom.index }}</td>
-          <td>{{ classroom.studentName }}</td>
+          <!-- <td>{{ classroom.studentName }}</td> -->
           <td>{{ classroom.className }}</td>
-          <td>
+          <!-- <td>
             {{ classroom.startDate | date: "medium" }}
-          </td>
-          <td>
+          </td> -->
+          <!-- <td>
             <span
               *ngIf="classroom.endDate.length <= 0"
               style="color: rgb(233, 14, 32);"
               >pending</span
             >
             {{ classroom.endDate | date: "medium" }}
-          </td>
-          <td
+          </td> -->
+          <!-- <td
             *ngIf="classroom.endDate.length <= 0"
             class="text-center action-block"
           >
@@ -84,7 +84,7 @@
               class="fas fa-edit"
               routerLink="/edit-classrecords/{{ classroom.$key }}"
             ></i>
-          </td>
+          </td> -->
 
           <td
             *ngIf="!(classroom.endDate.length <= 0)"

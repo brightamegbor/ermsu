@@ -102,7 +102,9 @@ export class CrudService {
     return this.classroomsRef;
   }
   GetOfficesList() {
-    this.officesRef = this.db.list("office-list");
+    this.officesRef = this.db.list("office-list", (ref) =>
+      ref.orderByChild("staffName")
+    );
     return this.officesRef;
   }
 
