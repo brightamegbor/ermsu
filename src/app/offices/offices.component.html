@@ -27,9 +27,11 @@
 
   <!-- Showing students data -->
   <div class="table-responsive" *ngIf="hideWhenNoOffice">
-    <mat-list role="list" *ngFor="let office of Office">
-      <mat-list-item role="listitem">{{ office }}</mat-list-item>
-    </mat-list>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option *ngFor="let office of Office">{{
+        office.officeName
+      }}</mat-list-option>
+    </mat-selection-list>
   </div>
   <!-- Pagination -->
   <pagination-controls
