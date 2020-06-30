@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Student } from '../shared/student';  // Student data type interface class
+import { Injectable } from "@angular/core";
+import { Student } from "../shared/student"; // Student data type interface class
 import {
   AngularFireDatabase,
-  AngularFireList, AngularFireObject } from '@angular/fire/database';  // Firebase modules for Database, Data list and Single object
-import { Classroom } from './classroom';
+  AngularFireList,
+  AngularFireObject,
+} from "@angular/fire/database"; // Firebase modules for Database, Data list and Single object
+import { Classroom } from "./classroom";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-
 export class CrudService {
-  studentsRef: AngularFireList<any>;    // Reference to Student data list, its an Observable
-  studentRef: AngularFireObject<any>;   // Reference to Student object, its an Observable too
+  studentsRef: AngularFireList<any>; // Reference to Student data list, its an Observable
+  studentRef: AngularFireObject<any>; // Reference to Student object, its an Observable too
 
   studentSearchRef: AngularFireList<any>;
 
@@ -20,9 +21,10 @@ export class CrudService {
 
   classrecordRef: AngularFireObject<any>;
   classrecordsRef: AngularFireList<any>;
+  officesRef: AngularFireList<any>;
 
   // Inject AngularFireDatabase Dependency in Constructor
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) {}
 
   // Create Student
   AddStudent(student: Student) {
@@ -35,26 +37,28 @@ export class CrudService {
       session: student.session,
       email: student.email,
       mobileNumber: student.mobileNumber,
-      photo: student.photo
+      photo: student.photo,
     });
   }
 
   // Fetch Single Student Object
   GetStudent(id: string) {
-    this.studentRef = this.db.object('students-list/' + id);
+    this.studentRef = this.db.object("students-list/" + id);
     return this.studentRef;
   }
-// search for student using index number
+  // search for student using index number
   SearchStudent(index: string) {
-    this.studentSearchRef = this.db.list('students-list', ref =>
-    ref.orderByChild('index').equalTo(index));
+    this.studentSearchRef = this.db.list("students-list", (ref) =>
+      ref.orderByChild("index").equalTo(index)
+    );
     return this.studentSearchRef;
   }
 
   // Fetch Students List
   GetStudentsList() {
-    this.studentsRef = this.db.list('students-list', ref =>
-    ref.orderByChild('firstName'));
+    this.studentsRef = this.db.list("students-list", (ref) =>
+      ref.orderByChild("firstName")
+    );
     return this.studentsRef;
   }
 
@@ -64,13 +68,13 @@ export class CrudService {
       firstName: student.firstName,
       lastName: student.lastName,
       email: student.email,
-      mobileNumber: student.mobileNumber
+      mobileNumber: student.mobileNumber,
     });
   }
 
   // Delete Student Object
   DeleteStudent(id: string) {
-    this.studentRef = this.db.object('students-list/' + id);
+    this.studentRef = this.db.object("students-list/" + id);
     this.studentRef.remove();
   }
 
@@ -86,31 +90,36 @@ export class CrudService {
     });
   }
 
-   // Fetch Single Student Object
-   GetClassrecord(id: string) {
-    this.classrecordRef = this.db.object('classrecords-list/' + id);
+  // Fetch Single Student Object
+  GetClassrecord(id: string) {
+    this.classrecordRef = this.db.object("classrecords-list/" + id);
     return this.classrecordRef;
   }
 
   // Fetch Students List
   GetClassroomsList() {
-    this.classroomsRef = this.db.list('classrooms-list');
+    this.classroomsRef = this.db.list("classrooms-list");
     return this.classroomsRef;
+  }
+  GetOfficesList() {
+    this.officesRef = this.db.list("offices-list");
+    return this.officesRef;
   }
 
   GetClassroomsInput(status: string) {
-    let newClassroomsRef = this.db.list('classrooms-list', ref =>
-    ref.orderByChild('status').equalTo(status));
+    let newClassroomsRef = this.db.list("classrooms-list", (ref) =>
+      ref.orderByChild("status").equalTo(status)
+    );
     return newClassroomsRef;
   }
 
   GetClassroom(id: string) {
-    this.classroomRef = this.db.object('classrooms-list/' + id);
+    this.classroomRef = this.db.object("classrooms-list/" + id);
     return this.classroomRef;
   }
 
   GetClassRecordsList() {
-    this.classrecordsRef = this.db.list('classrecords-list');
+    this.classrecordsRef = this.db.list("classrecords-list");
     return this.classrecordsRef;
   }
 
@@ -128,10 +137,9 @@ export class CrudService {
   }
 
   UpdateClassRoom(id: string, status: string) {
-    const newClass = this.db.object('classrooms-list/' + id);
+    const newClass = this.db.object("classrooms-list/" + id);
     newClass.update({
-    status: status,
-  });
-}
-
+      status: status,
+    });
+  }
 }

@@ -20,23 +20,41 @@
 
           <!-- routerLink="/view-students" to navigate to view-students component -->
           <!-- routerLinkActive="active" activates active class for component-->
-          <li class="nav-item">
+          <li class="nav-item" (click)="sidenav.toggle()">
             <a
               class="nav-link"
               routerLink="/view-students"
               routerLinkActive="active"
             >
-              <i class="fas fa-list-ul"></i>Students List
+              <i class="fas fa-graduation-cap"></i>Students List
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" (click)="sidenav.toggle()">
             <a
               class="nav-link"
               routerLink="/view-classrooms"
               routerLinkActive="active"
             >
-              <i class="fas fa-list-ul"></i>Classrooms
+              <i class="fas fa-school"></i>Classrooms
+            </a>
+          </li>
+          <li class="nav-item" (click)="sidenav.toggle()">
+            <a
+              class="nav-link"
+              routerLink="/add-classrecords"
+              routerLinkActive="active"
+            >
+              <i class="fas fa-plus"></i>Add Class Record
+            </a>
+          </li>
+          <li class="nav-item" (click)="sidenav.toggle()">
+            <a
+              class="nav-link"
+              routerLink="/view-records"
+              routerLinkActive="active"
+            >
+              <i class="fas fa-eye custom-fa-eye"></i>View Class Record
             </a>
           </li>
 
@@ -45,8 +63,24 @@
               class="nav-link"
               routerLink="/view-offices"
               routerLinkActive="active"
+              (click)="sidenav.toggle()"
             >
-              <i class="fas fa-list-ul"></i>Offices
+              <i class="fas fa-university"></i>Offices
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/add-officerecords"
+              routerLinkActive="active"
+              (click)="sidenav.toggle()"
+            >
+              <i class="fas fa-university"></i>Add Offices Record
+            </a>
+          </li>
+          <li class="nav-item" (click)="sidenav.toggle()">
+            <a class="nav-link" (click)="logout()">
+              <i class="fas fa-sign-out-alt"></i>Logout
             </a>
           </li>
         </ul>
@@ -72,10 +106,15 @@
         E-Record Manager
       </a>
 
-      <a class="px-3" href="#" (click)="logout()" style="color: white;">
+      <a
+        class="px-3"
+        href="#"
+        routerLink="/search-student"
+        style="color: white;"
+      >
         <span class="user-image pt-2" *ngIf="afAuth.auth.currentUser"
-          >Logout</span
-        >
+          ><i class="fas fa-search custom-fa-search"></i
+        ></span>
       </a>
       <!-- Sidebar navigation -->
     </nav>

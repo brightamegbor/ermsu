@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
+import { MatSidenav } from "@angular/material";
 
 @Component({
   selector: "app-root",
@@ -7,11 +8,16 @@ import { AngularFireAuth } from "@angular/fire/auth";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  title = "app";
+  title = "ERecordManager";
+  @ViewChild("drawer", { static: false }) drawer: MatSidenav;
 
   constructor(public afAuth: AngularFireAuth) {}
 
   logout() {
     this.afAuth.auth.signOut();
+  }
+
+  closeSidebar() {
+    this.drawer.close();
   }
 }

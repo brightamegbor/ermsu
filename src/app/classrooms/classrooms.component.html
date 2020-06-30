@@ -1,7 +1,9 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Classrooms</h1>
-    <!-- It won't show if there is no student data -->
-    <a routerLink="/add-classrecords" class="btn btn-success">
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+>
+  <h1 class="h2">Classrooms</h1>
+  <!-- It won't show if there is no student data -->
+  <!-- <a routerLink="/add-classrecords" class="btn btn-success">
       <i class="fas fa-plus custom-fa-plus"></i>
       Add Record
     </a>
@@ -9,59 +11,75 @@
     <a routerLink="/view-records" class="btn btn-dark">
       <i class="fas fa-eye custom-fa-search"></i>
       View Records
-    </a>
+    </a> -->
 
-    <!-- <a routerLink="/register-student" class="btn btn-success">
+  <!-- <a routerLink="/register-student" class="btn btn-success">
         <i class="fas fa-search custom-fa-search"></i>
         Add Key Record
       </a> -->
+</div>
+
+<div class="pricing-header mx-auto">
+  <!-- Preloader shows before the data loads-->
+  <div class="no-data text-center" *ngIf="preLoader">
+    <img src="assets/preloader.gif" class="preloader-icon" alt="No Classroom" />
   </div>
-  
-  <div class="pricing-header mx-auto">
-  
-    <!-- Preloader shows before the data loads-->
-    <div class="no-data text-center" *ngIf="preLoader">
-      <img src="assets/preloader.gif" class="preloader-icon" alt="No Classroom">
-    </div>
-  
-    <!-- No data shows when their is no student data available -->
-    <div class="no-data text-center" *ngIf="noData">
-      <img src="assets/no-student.svg" class="nodata-msg" alt="No Classroom">
-      <p class="nodata-msg">No Classroom added yet!</p>
-      <!-- <a routerLink="/register-student" class="btn btn-success">
+
+  <!-- No data shows when their is no student data available -->
+  <div class="no-data text-center" *ngIf="noData">
+    <img src="assets/no-student.svg" class="nodata-msg" alt="No Classroom" />
+    <p class="nodata-msg">No Classroom added yet!</p>
+    <!-- <a routerLink="/register-student" class="btn btn-success">
         <i class="fas fa-plus custom-fa-plus"></i>
         Add Classroom
       </a> -->
-    </div>
-  
-    <!-- Showing Classroom data -->
-    <div class="table-responsive" *ngIf="hideWhenNoClassroom">
-      <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
-        <thead>
-          <tr>
-            <th scope="col">Classroom Id</th>
-            <th scope="col">Classroom Name</th>
-            <th scope="col">Classroom Block</th>
-            <th class="text-center" scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- *ngFor loop iterates over Student array and fetch the student's data -->
-          <!-- paginate pipe will add pagination in student's list, it won't show if items are less then 7 -->
-          <tr *ngFor="let classroom of Classroom | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
-            <th scope="row">{{classroom.$key}}</th>
-            <td>{{classroom.className}}</td>
-            <td>{{classroom.classBlock}}</td>
-            <td class="text-center action-block">
-              <span *ngIf="classroom.status === 'free'" style="color: green;">{{classroom.status}}</span>
-              <span *ngIf="classroom.status === 'occupied'" style="color: coral;">{{classroom.status}}</span>
-              <!-- <i class="far fa-trash-alt" (click)="deleteStudent(student)"></i> -->
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!-- Pagination -->
-    <pagination-controls (pageChange)="p = $event" autoHide="false" responsive="true"></pagination-controls>
-  
   </div>
+
+  <!-- Showing Classroom data -->
+  <div class="table-responsive" *ngIf="hideWhenNoClassroom">
+    <table
+      class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg"
+    >
+      <thead>
+        <tr>
+          <th scope="col">Classroom Id</th>
+          <th scope="col">Classroom Name</th>
+          <th scope="col">Classroom Block</th>
+          <th class="text-center" scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- *ngFor loop iterates over Student array and fetch the student's data -->
+        <!-- paginate pipe will add pagination in student's list, it won't show if items are less then 7 -->
+        <tr
+          *ngFor="
+            let classroom of Classroom
+              | paginate: { itemsPerPage: 7, currentPage: p };
+            let i = index
+          "
+        >
+          <th scope="row">{{ classroom.$key }}</th>
+          <td>{{ classroom.className }}</td>
+          <td>{{ classroom.classBlock }}</td>
+          <td class="text-center action-block">
+            <span *ngIf="classroom.status === 'free'" style="color: green;">{{
+              classroom.status
+            }}</span>
+            <span
+              *ngIf="classroom.status === 'occupied'"
+              style="color: coral;"
+              >{{ classroom.status }}</span
+            >
+            <!-- <i class="far fa-trash-alt" (click)="deleteStudent(student)"></i> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Pagination -->
+  <pagination-controls
+    (pageChange)="p = $event"
+    autoHide="false"
+    responsive="true"
+  ></pagination-controls>
+</div>

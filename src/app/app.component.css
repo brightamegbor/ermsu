@@ -12,3 +12,22 @@
 .mat-sidenav-content {
   height: 100vh !important;
 }
+
+.mat-drawer {
+  width: 35vh;
+}
+
+.bg-light {
+  background-color: #ffffff !important;
+}
+
+.nav-link {
+  color: #333;
+}
+
+.nav-link.active {
+  background-color: rgba(100, 148, 237, 0.199);
+  font-weight: 900;
+  width: 96%;
+  color: #3f51b5 !important;
+}
