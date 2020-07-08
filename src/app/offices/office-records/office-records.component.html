@@ -1,7 +1,7 @@
 <div
   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
 >
-  <h1 class="h2">Offices</h1>
+  <h1 class="h2">Offices Records</h1>
   <!-- It won't show if there is no student data -->
   <!-- <a routerLink="/add-officerecords" class="btn btn-success">
     <i class="fas fa-search custom-fa-search"></i>
@@ -35,23 +35,23 @@
         <td mat-cell *matCellDef="let student" scope="row">{{ student.$key }}</td>
       </ng-container> -->
 
-      <ng-container matColumnDef="Block">
-        <mat-header-cell *matHeaderCellDef>Block</mat-header-cell>
-        <mat-cell *matCellDef="let office">{{ office.officeBlock }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="Name">
-        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let office">
-          {{ office.officeName }}
-        </mat-cell>
+      <ng-container matColumnDef="Staff ID">
+        <mat-header-cell *matHeaderCellDef>Staff ID</mat-header-cell>
+        <mat-cell *matCellDef="let office">{{ office.staffID }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Staff">
+        <mat-header-cell *matHeaderCellDef>Staff</mat-header-cell>
+        <mat-cell *matCellDef="let office">
+          {{ office.staffName }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Office #">
         <mat-header-cell *matHeaderCellDef mat-sort-header>
-          Staff
+          Office #
         </mat-header-cell>
-        <mat-cell *matCellDef="let office">{{ office.staffName }}</mat-cell>
+        <mat-cell *matCellDef="let office">{{ office.officeName }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Status">
@@ -59,13 +59,26 @@
           Status
         </mat-header-cell>
         <mat-cell *matCellDef="let office"
-          ><span class="text-danger" *ngIf="office.status == 'closed'">{{
-            office.status
-          }}</span>
-          <span class="text-success" *ngIf="office.status == 'opened'">{{
-            office.status
-          }}</span></mat-cell
+          ><span class="text-danger" *ngIf="office.endDate == ''">
+            pending
+          </span>
+          <span class="text-success" *ngIf="office.endDate != ''">
+            submitted
+          </span></mat-cell
         >
+      </ng-container>
+
+      <ng-container matColumnDef="Action">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Action
+        </mat-header-cell>
+        <mat-cell *matCellDef="let office">
+          <span class="text-success" *ngIf="office.endDate == ''">
+            <i
+              class="fas fa-edit"
+              routerLink="/edit-classrecords/{{ office.$key }}"
+            ></i> </span
+        ></mat-cell>
       </ng-container>
 
       <!-- <th class="text-center" >Edit</th> -->
@@ -77,9 +90,7 @@
         *matRowDef="let row; columns: displayedColumns"
         matRipple
       ></tr> -->
-      <mat-header-row
-        *matHeaderRowDef="displayedColumns; sticky: true"
-      ></mat-header-row>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row
         *matRowDef="let row; columns: displayedColumns"
         matRipple

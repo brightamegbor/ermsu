@@ -1,22 +1,24 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { CrudService } from "../shared/crud.service";
+import { Office } from "src/app/shared/office";
+import { MatTableDataSource, MatSort, MatPaginator } from "@angular/material";
+import { CrudService } from "src/app/shared/crud.service";
 import { ToastrService } from "ngx-toastr";
-import { Office } from "../shared/office";
-import { MatSort, MatPaginator, MatTableDataSource } from "@angular/material";
+import { Location } from "@angular/common";
 
 @Component({
-  selector: "app-offices",
-  templateUrl: "./offices.component.html",
-  styleUrls: ["./offices.component.css"],
+  selector: "app-office-records",
+  templateUrl: "./office-records.component.html",
+  styleUrls: ["./office-records.component.css"],
 })
-export class OfficesComponent implements OnInit {
+export class OfficeRecordsComponent implements OnInit {
   p: number = 1; // Fix for AOT compilation error for NGX pagination
   Office: Office[]; // Save students data in Student's array.
   hideWhenNoOffice: boolean = false; // Hide students data table when no student.
   noData: boolean = false; // Showing No Student Message, when no student in database.
   preLoader: boolean = true;
+  sDate: Office[];
 
-  displayedColumns = ["Block", "Name", "Staff", "Status"];
+  displayedColumns = ["Staff ID", "Staff", "Office #", "Status", "Action"];
 
   dataSource = new MatTableDataSource<Office>();
 
@@ -25,12 +27,13 @@ export class OfficesComponent implements OnInit {
 
   constructor(
     public crudApi: CrudService, // Inject student CRUD services in constructor.
-    public toastr: ToastrService
+    public toastr: ToastrService,
+    private location: Location
   ) {}
 
   ngOnInit() {
     this.dataState(); // Initialize student's list, when component is ready
-    let s = this.crudApi.GetOfficesList();
+    let s = this.crudApi.GetOfficeRecordsList();
     s.snapshotChanges().subscribe((data) => {
       // Using snapshotChanges() method to retrieve list of data along with metadata($key)
       this.Office = [];
@@ -38,6 +41,8 @@ export class OfficesComponent implements OnInit {
         let a = item.payload.toJSON();
         a["$key"] = item.key;
         this.Office.push(a as Office);
+        let startDate = item.payload.toJSON["startDate"];
+        this.sDate = startDate;
       });
 
       this.dataSource.data = this.Office;
@@ -47,6 +52,10 @@ export class OfficesComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       }, 300);
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   dataState() {

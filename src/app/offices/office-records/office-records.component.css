@@ -1,0 +1,23 @@
+table {
+  width: 100% !important;
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  padding: 1rem !important;
+}
+
+.mat-ripple {
+  background-position: center !important;
+  transition: background 0.8s !important;
+}
+.mat-ripple:hover {
+  background: white radial-gradient(circle, transparent 1%, white 1%)
+    center/15000%;
+}
+.mat-ripple:active {
+  background-color: #ccc;
+  background-size: 100%;
+  transition: background 0s;
+}

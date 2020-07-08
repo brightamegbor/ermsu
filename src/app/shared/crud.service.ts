@@ -1,3 +1,4 @@
+import { Office } from "./office";
 import { Injectable } from "@angular/core";
 import { Student } from "../shared/student"; // Student data type interface class
 import {
@@ -21,7 +22,12 @@ export class CrudService {
 
   classrecordRef: AngularFireObject<any>;
   classrecordsRef: AngularFireList<any>;
+
   officesRef: AngularFireList<any>;
+  officeRef: AngularFireObject<any>;
+
+  officeRecordsRef: AngularFireList<any>;
+  officeRecordRef: AngularFireObject<any>;
 
   // Inject AngularFireDatabase Dependency in Constructor
   constructor(private db: AngularFireDatabase) {}
@@ -90,6 +96,18 @@ export class CrudService {
     });
   }
 
+  AddOfficeRecord(office: Office) {
+    this.officeRecordsRef.push({
+      staffID: office.staffID,
+      staffName: office.staffName,
+      officeName: office.officeName,
+      startDate: office.startDate.getTime(),
+      endDate: office.endDate,
+      // startTime: classroom.startTime,
+      // endTime: classroom.endTime
+    });
+  }
+
   // Fetch Single Student Object
   GetClassrecord(id: string) {
     this.classrecordRef = this.db.object("classrecords-list/" + id);
@@ -125,6 +143,11 @@ export class CrudService {
     return this.classrecordsRef;
   }
 
+  GetOfficeRecordsList() {
+    this.officeRecordsRef = this.db.list("officerecords-list");
+    return this.officeRecordsRef;
+  }
+
   // Update Student Object
   UpdateClassRecord(classroom: Classroom) {
     this.classrecordRef.update({
@@ -138,9 +161,29 @@ export class CrudService {
     });
   }
 
+  // Update Office Record
+  UpdateOfficeRecord(office: Office) {
+    this.classrecordRef.update({
+      staffID: office.staffID,
+      staffName: office.staffName,
+      officeName: office.officeName,
+      startDate: office.startDate,
+      endDate: office.endDate.getTime(),
+      // startTime: classroom.startTime,
+      // endTime: classroom.endTime
+    });
+  }
+
   UpdateClassRoom(id: string, status: string) {
     const newClass = this.db.object("classrooms-list/" + id);
     newClass.update({
+      status: status,
+    });
+  }
+
+  UpdateOffice(id: string, status: string) {
+    const newOffice = this.db.object("office-list/" + id);
+    newOffice.update({
       status: status,
     });
   }

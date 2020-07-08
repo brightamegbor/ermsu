@@ -39,6 +39,7 @@
               <i class="fas fa-school"></i>Classrooms
             </a>
           </li>
+
           <li class="nav-item" (click)="sidenav.toggle()">
             <a
               class="nav-link"
@@ -48,6 +49,7 @@
               <i class="fas fa-plus"></i>Add Class Record
             </a>
           </li>
+
           <li class="nav-item" (click)="sidenav.toggle()">
             <a
               class="nav-link"
@@ -58,26 +60,35 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" (click)="sidenav.toggle()">
             <a
               class="nav-link"
               routerLink="/view-offices"
               routerLinkActive="active"
-              (click)="sidenav.toggle()"
             >
               <i class="fas fa-university"></i>Offices
             </a>
           </li>
-          <li class="nav-item">
+
+          <li class="nav-item" (click)="sidenav.toggle()">
             <a
               class="nav-link"
               routerLink="/add-officerecords"
               routerLinkActive="active"
-              (click)="sidenav.toggle()"
             >
               <i class="fas fa-university"></i>Add Offices Record
             </a>
           </li>
+          <li class="nav-item" (click)="sidenav.toggle()">
+            <a
+              class="nav-link"
+              routerLink="/officerecords"
+              routerLinkActive="active"
+            >
+              <i class="fas fa-university"></i>View Offices Record
+            </a>
+          </li>
+
           <li class="nav-item" (click)="sidenav.toggle()">
             <a class="nav-link" (click)="logout()">
               <i class="fas fa-sign-out-alt"></i>Logout
