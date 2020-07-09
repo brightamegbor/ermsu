@@ -46,7 +46,8 @@ import { MaterialModule } from "./material.module";
 // import { MatSortModule } from '@angular/material';
 import { LoginComponent } from "./auth/login/login.component";
 import { UserServiceModuleModule } from "./auth/user-service-module/user-service-module.module";
-import { OfficeRecordsComponent } from './offices/office-records/office-records.component';
+import { OfficeRecordsComponent } from "./offices/office-records/office-records.component";
+import { EditOfficerecordsComponent } from "./offices/edit-officerecords/edit-officerecords.component";
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: "popup",
@@ -79,6 +80,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     ConfirmationDialogComponent,
     LoginComponent,
     OfficeRecordsComponent,
+    EditOfficerecordsComponent,
   ],
   imports: [
     BrowserModule,

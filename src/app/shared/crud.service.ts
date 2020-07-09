@@ -114,6 +114,11 @@ export class CrudService {
     return this.classrecordRef;
   }
 
+  GetOfficerecord(id: string) {
+    this.officeRecordRef = this.db.object("officerecords-list/" + id);
+    return this.officeRecordRef;
+  }
+
   // Fetch Students List
   GetClassroomsList() {
     this.classroomsRef = this.db.list("classrooms-list");
@@ -163,7 +168,7 @@ export class CrudService {
 
   // Update Office Record
   UpdateOfficeRecord(office: Office) {
-    this.classrecordRef.update({
+    this.officeRecordRef.update({
       staffID: office.staffID,
       staffName: office.staffName,
       officeName: office.officeName,

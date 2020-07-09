@@ -1,7 +1,7 @@
 <div
   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
 >
-  <h1 class="h2">Edit Classroom Record</h1>
+  <h1 class="h2">Edit Office Record</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group">
       <!-- goBack() methos to back to previous component -->
@@ -21,40 +21,43 @@
           <div class="col-lg-5 col-md-12 col-sm-12">
             <div class="row">
               <div class="col-md-12 mb-3">
-                <label>Select Class</label>
+                <label>Select Office</label>
                 <input
                   type="text"
-                  formControlName="className"
+                  formControlName="officeName"
                   class="form-control"
                   disabled
                 />
-                <p *ngIf="className.touched && className.invalid" class="error">
-                  <sup>*</sup>Please enter class name
+                <p
+                  *ngIf="officeName.touched && officeName.invalid"
+                  class="error"
+                >
+                  <sup>*</sup>Please enter office name
                 </p>
               </div>
 
               <div class="col-md-12 mb-3">
-                <label>Student ID</label>
+                <label>Staff ID</label>
                 <input
                   type="text"
-                  formControlName="index"
+                  formControlName="staffID"
                   class="form-control"
                   required
                 />
                 <!-- Showing errors using getter method -->
-                <p *ngIf="index.touched && index.invalid" class="error">
-                  <sup>*</sup>Please enter index number
+                <p *ngIf="staffID.touched && staffID.invalid" class="error">
+                  <sup>*</sup>Please enter staffID
                 </p>
-                <p *ngIf="index.errors?.minlength" class="error">
-                  <sup>*</sup>ID shouldn't be less than 12 words
+                <p *ngIf="staffID.errors?.minlength" class="error">
+                  <sup>*</sup>ID shouldn't be less than 8 words
                 </p>
               </div>
 
               <div class="col-md-12 mb-3">
-                <label>Student name</label>
+                <label>Staff name</label>
                 <input
                   type="text"
-                  formControlName="studentName"
+                  formControlName="staffName"
                   class="form-control"
                 />
               </div>
@@ -97,7 +100,7 @@
                 class="btn btn-success btn-block"
                 [disabled]="!editForm.valid"
               >
-                Update ClassRecord
+                Update OfficeRecord
               </button>
             </div>
           </div>

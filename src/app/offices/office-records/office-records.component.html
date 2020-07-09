@@ -59,11 +59,11 @@
           Status
         </mat-header-cell>
         <mat-cell *matCellDef="let office"
-          ><span class="text-danger" *ngIf="office.endDate == ''">
-            pending
+          ><span class="text-success" *ngIf="office.endDate == ''">
+            opened
           </span>
-          <span class="text-success" *ngIf="office.endDate != ''">
-            submitted
+          <span class="text-danger" *ngIf="office.endDate != ''">
+            closed
           </span></mat-cell
         >
       </ng-container>
@@ -76,7 +76,7 @@
           <span class="text-success" *ngIf="office.endDate == ''">
             <i
               class="fas fa-edit"
-              routerLink="/edit-classrecords/{{ office.$key }}"
+              routerLink="/edit-officerecords/{{ office.$key }}"
             ></i> </span
         ></mat-cell>
       </ng-container>
