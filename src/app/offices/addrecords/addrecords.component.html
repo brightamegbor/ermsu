@@ -16,6 +16,14 @@
 <form [formGroup]="newOfficesForm" (ngSubmit)="submitOfficeData()" novalidate>
   <div class="row">
     <div class="col-lg-5 col-md-12 col-sm-12">
+      <label>Username</label>
+      <input
+        type="text"
+        formControlName="addedBy"
+        class="form-control mb-3"
+        required
+        disabled
+      />
       <div class="row">
         <div class="col-md-12 mb-3">
           <label>Select Office</label>
@@ -53,14 +61,30 @@
 
         <div class="col-md-12 mb-3">
           <label>Staff name</label>
-          <input
+          <!-- <input
             type="text"
             pattern="[a-zA-Z ]+"
             ng-pattern-restrict
             formControlName="staffName"
             class="form-control"
             placeholder="enter name"
-          />
+          /> -->
+
+          <select
+            (change)="changeStaff($event)"
+            formControlName="staffName"
+            class="custom-select"
+            required
+          >
+            <option value="" disabled><span>Choose staff name</span> </option>
+            <!-- <option value="" disabled *ngIf="classroom.$key.length <= 0">No class available</option> -->
+            <option
+              *ngFor="let staffresult of staffSearch"
+              [value]="staffresult.staffName"
+            >
+              {{ staffresult.staffName }}</option
+            >
+          </select>
           <p *ngIf="staffName.touched && staffName.invalid" class="error">
             <sup>*</sup>Please enter correct name spellings
           </p>

@@ -6,6 +6,7 @@ import { ToastrService } from "ngx-toastr";
 import { MatDialog } from "@angular/material";
 import { ConfirmationDialogComponent } from "src/app/classrooms/editrecords/editrecords.component";
 import { Location } from "@angular/common"; // Location service is used to go back to previous component
+import { AngularFireAuth } from "@angular/fire/auth";
 
 export interface DialogData {
   confirmMsgY: string;
@@ -22,6 +23,7 @@ export class EditOfficerecordsComponent implements OnInit {
   comfirmation: any;
   confirmMsgY: string;
   confirmMsgN: string;
+  user: any;
 
   constructor(
     private crudApi: CrudService, // Inject CRUD API in constructor
@@ -30,7 +32,8 @@ export class EditOfficerecordsComponent implements OnInit {
     private actRoute: ActivatedRoute, // Activated route to get the current component's inforamation
     private router: Router, // Router service to navigate to specific component
     private toastr: ToastrService, // Toastr service for alert message
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private afAuth: AngularFireAuth
   ) {}
 
   ngOnInit() {
@@ -43,9 +46,18 @@ export class EditOfficerecordsComponent implements OnInit {
         // console.log(data);
         this.editForm.setValue(data); // Using SetValue() method, It's a ReactiveForm's API to store intial value of reactive form
       });
+
+    this.afAuth.authState.subscribe((user) => {
+      this.user = user.email;
+      this.editForm.get("addedBy").setValue(this.user);
+    });
   }
 
   // Accessing form control using getters
+  get addedBy() {
+    return this.editForm.get("addedBy");
+  }
+
   get staffID() {
     return this.editForm.get("staffID");
   }
@@ -69,6 +81,7 @@ export class EditOfficerecordsComponent implements OnInit {
   // Contains Reactive Form logic
   updateOfficeRecordData() {
     this.editForm = this.fb.group({
+      addedBy: [""],
       staffID: ["", [Validators.required, Validators.minLength(8)]],
       staffName: ["", [Validators.required, Validators.minLength(2)]],
       officeName: ["", [Validators.required]],

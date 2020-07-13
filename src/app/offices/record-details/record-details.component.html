@@ -1,0 +1,77 @@
+<div class="container pt-3">
+  <div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+  >
+    <h2>
+      Office Record Details
+    </h2>
+
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group">
+        <!-- goBack() methos to back to previous component -->
+        <button class="btn btn-sm btn-outline-secondary" (click)="goBack()">
+          Go Back
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <mat-card>
+    <div class="row">
+      <div class="col-6">
+        office name <br />
+        <h2 class="pb-3">
+          {{ officeDetail.officeName }}
+        </h2>
+      </div>
+
+      <div class="col-6 text-center mx-auto">
+        <p class="rounded-pill custom-border-circle text-sm mx-auto">
+          added by
+        </p>
+        <p>
+          {{ officeDetail.addedBy }}
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        staff ID <br />
+        <h6>
+          {{ officeDetail.staffID }}
+        </h6>
+      </div>
+
+      <div class="col-6 text-center mx-auto">
+        <p class="rounded-pill custom-border-circle mx-auto">
+          key released time
+        </p>
+        <p>
+          {{ officeDetail.startDate | date: "medium" }}
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        staff name <br />
+        <h6>
+          {{ officeDetail.staffName }}
+        </h6>
+      </div>
+
+      <div class="col-6 text-center">
+        <p class="rounded-pill custom-border-circle mx-auto">
+          key returned time
+        </p>
+        <p *ngIf="officeDetail.endDate == ''">
+          pending submission
+        </p>
+        <p>
+          {{ officeDetail.endDate | date: "medium" }}
+        </p>
+      </div>
+    </div>
+  </mat-card>
+</div>

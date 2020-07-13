@@ -59,11 +59,11 @@
           Status
         </mat-header-cell>
         <mat-cell *matCellDef="let office"
-          ><span class="text-success" *ngIf="office.endDate == ''">
-            opened
+          ><span class="text-danger" *ngIf="office.endDate == ''">
+            pending
           </span>
-          <span class="text-danger" *ngIf="office.endDate != ''">
-            closed
+          <span class="text-success" *ngIf="office.endDate != ''">
+            submitted
           </span></mat-cell
         >
       </ng-container>
@@ -73,12 +73,25 @@
           Action
         </mat-header-cell>
         <mat-cell *matCellDef="let office">
-          <span class="text-success" *ngIf="office.endDate == ''">
-            <i
-              class="fas fa-edit"
+          <span class="text-center" [matMenuTriggerFor]="menu">
+            <i class="fas fa-ellipsis-v"></i>
+          </span>
+          <mat-menu #menu="matMenu">
+            <button
+              *ngIf="office.endDate == ''"
+              mat-menu-item
               routerLink="/edit-officerecords/{{ office.$key }}"
-            ></i> </span
-        ></mat-cell>
+            >
+              edit
+            </button>
+            <button
+              mat-menu-item
+              routerLink="/view-recorddetails/{{ office.$key }}"
+            >
+              view
+            </button>
+          </mat-menu>
+        </mat-cell>
       </ng-container>
 
       <!-- <th class="text-center" >Edit</th> -->
@@ -119,9 +132,9 @@
     ></mat-paginator>
   </div>
   <!-- Pagination -->
-  <pagination-controls
+  <!-- <pagination-controls
     (pageChange)="p = $event"
     autoHide="true"
     responsive="true"
-  ></pagination-controls>
+  ></pagination-controls> -->
 </div>

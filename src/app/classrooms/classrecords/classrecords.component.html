@@ -1,7 +1,7 @@
 <div
   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
 >
-  <h1 class="h2">Add New Record</h1>
+  <h1 class="h2">Add New Class Record</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group">
       <!-- goBack() methos to back to previous component -->
@@ -93,11 +93,10 @@
         <div class="col-md-12 mb-3">
           <label>Time (returned key)</label>
           <input
-            [owlDateTime]="dt2"
-            [owlDateTimeTrigger]="dt2"
             formControlName="endDate"
             placeholder="pick a date"
             class="form-control"
+            disabled
           />
           <owl-date-time #dt2></owl-date-time>
           <!-- Showing errors using getter method -->

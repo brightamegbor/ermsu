@@ -16,6 +16,7 @@ export class CrudService {
   studentRef: AngularFireObject<any>; // Reference to Student object, its an Observable too
 
   studentSearchRef: AngularFireList<any>;
+  staffSearchRef: AngularFireList<any>;
 
   classroomsRef: AngularFireList<any>;
   classroomRef: AngularFireObject<any>;
@@ -98,6 +99,7 @@ export class CrudService {
 
   AddOfficeRecord(office: Office) {
     this.officeRecordsRef.push({
+      addedBy: office.addedBy,
       staffID: office.staffID,
       staffName: office.staffName,
       officeName: office.officeName,
@@ -131,11 +133,25 @@ export class CrudService {
     return this.officesRef;
   }
 
+  GetStaffName(officeName: string) {
+    this.staffSearchRef = this.db.list("office-list", (ref) =>
+      ref.orderByChild("officeName").equalTo(officeName)
+    );
+    return this.staffSearchRef;
+  }
+
   GetClassroomsInput(status: string) {
     let newClassroomsRef = this.db.list("classrooms-list", (ref) =>
       ref.orderByChild("status").equalTo(status)
     );
     return newClassroomsRef;
+  }
+
+  GetClosedOfficesList() {
+    let newOfficesRef = this.db.list("office-list", (ref) =>
+      ref.orderByChild("status").equalTo("closed")
+    );
+    return newOfficesRef;
   }
 
   GetClassroom(id: string) {

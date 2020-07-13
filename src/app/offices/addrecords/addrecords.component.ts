@@ -1,9 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from "@angular/forms";
 import { CrudService } from "src/app/shared/crud.service";
 import { ToastrService } from "ngx-toastr";
 import { Office } from "src/app/shared/office";
 import { Location } from "@angular/common"; // Location service is used to go back to previous component
+import { Router } from "@angular/router";
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
   selector: "app-addrecords",
@@ -13,21 +20,25 @@ import { Location } from "@angular/common"; // Location service is used to go ba
 export class AddrecordsComponent implements OnInit {
   public newOfficesForm: FormGroup; // Define FormGroup to student's form
   Office: Office[];
+  staffSearch: Office[];
+  user: string;
 
   constructor(
     public crudApi: CrudService, // CRUD API services
     private location: Location,
     public fb: FormBuilder, // Form Builder service for Reactive forms
-    public toastr: ToastrService
+    public toastr: ToastrService,
+    private router: Router,
+    private afAuth: AngularFireAuth
   ) {}
 
   ngOnInit() {
-    this.crudApi.GetOfficesList(); // Call GetStudentsList() before main form is being called
+    this.crudApi.GetClosedOfficesList(); // Call GetStudentsList() before main form is being called
     this.crudApi.GetOfficeRecordsList();
     this.newOfficeForm(); // Call student form when component is ready
 
     this.dataState(); // Initialize student's list, when component is ready
-    let s = this.crudApi.GetOfficesList();
+    let s = this.crudApi.GetClosedOfficesList();
     s.snapshotChanges().subscribe((data) => {
       // Using snapshotChanges() method to retrieve list of data along with metadata($key)
       this.Office = [];
@@ -38,11 +49,21 @@ export class AddrecordsComponent implements OnInit {
       });
       console.log(this.Office);
     });
+
+    this.afAuth.authState.subscribe((user) => {
+      this.user = user.email.toString();
+
+      this.newOfficesForm.get("addedBy").setValue(this.user);
+    });
+
+    // this.newOfficesForm.controls["addedBy"].setValue(this.user);
+    // this.newOfficesForm.get("addedBy").setValue(this.user);
   }
 
   // Reactive student form
   newOfficeForm() {
     this.newOfficesForm = this.fb.group({
+      addedBy: [""],
       staffID: ["", [Validators.required, Validators.minLength(8)]],
       staffName: ["", [Validators.required, Validators.minLength(2)]],
       officeName: ["", [Validators.required]],
@@ -54,6 +75,9 @@ export class AddrecordsComponent implements OnInit {
   }
 
   // Accessing form control using getters
+  get addedBy() {
+    return this.newOfficesForm.get("addedBy");
+  }
   get staffID() {
     return this.newOfficesForm.get("staffID");
   }
@@ -104,6 +128,28 @@ export class AddrecordsComponent implements OnInit {
     this.officeName.setValue(e.target.value, {
       onlySelf: true,
     });
+
+    this.staffNameSearch(this.newOfficesForm.value.officeName);
+  }
+
+  changeStaff(e) {
+    this.staffName.setValue(e.target.value, {
+      onlySelf: true,
+    });
+  }
+
+  staffNameSearch(officeName: string) {
+    let search = this.crudApi.GetStaffName(officeName);
+    search.snapshotChanges().subscribe((data) => {
+      // Using snapshotChanges() method to retrieve list of data along with metadata($key)
+      this.staffSearch = [];
+      data.forEach((item) => {
+        let a = item.payload.toJSON();
+        a["$key"] = item.key;
+        this.staffSearch.push(a as Office);
+      });
+      console.log(this.staffSearch);
+    });
   }
 
   submitOfficeData() {
@@ -120,6 +166,7 @@ export class AddrecordsComponent implements OnInit {
     ); // Show success message when data is successfully submited
 
     this.ResetForm2(); // Reset form when clicked on reset button
+    this.router.navigate(["officerecords"]);
   }
 
   dataState() {

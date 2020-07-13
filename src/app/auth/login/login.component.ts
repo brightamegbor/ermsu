@@ -10,6 +10,7 @@ import { FormControl, Validators } from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
   errorBol: boolean;
+  busy: boolean;
   errorMSG: string;
   email = new FormControl("", [Validators.required, Validators.email]);
 
@@ -20,15 +21,19 @@ export class LoginComponent implements OnInit {
   }
 
   SignIn(email, password) {
+    this.busy = true;
+    this.errorBol = false;
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         // this.router.navigate(["<!-- enter your route name here -->"]);
         console.log("success");
+        this.busy = false;
       })
       .catch((error) => {
         // window.alert(error.message);
         this.errorBol = true;
+        this.busy = false;
         this.errorMSG =
           "There is no user record corresponding to this credentials. Please contact admin for assistance";
       });

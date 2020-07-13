@@ -48,6 +48,7 @@ import { LoginComponent } from "./auth/login/login.component";
 import { UserServiceModuleModule } from "./auth/user-service-module/user-service-module.module";
 import { OfficeRecordsComponent } from "./offices/office-records/office-records.component";
 import { EditOfficerecordsComponent } from "./offices/edit-officerecords/edit-officerecords.component";
+import { RecordDetailsComponent } from './offices/record-details/record-details.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: "popup",
@@ -81,6 +82,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     LoginComponent,
     OfficeRecordsComponent,
     EditOfficerecordsComponent,
+    RecordDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,9 +8,9 @@
     Add Record
   </a> -->
 
-  <button class="btn btn-sm btn-outline-secondary" (click)="goBack()">
+  <!-- <button class="btn btn-sm btn-outline-secondary" (click)="goBack()">
     Go Back
-  </button>
+  </button> -->
   <!-- <a routerLink="/register-student" class="btn btn-success">
         <i class="fas fa-search custom-fa-search"></i>
         Add Key Record
@@ -58,7 +58,7 @@
         <tr
           *ngFor="
             let classroom of Classroom
-              | paginate: { itemsPerPage: 7, currentPage: p };
+              | paginate: { itemsPerPage: 10, currentPage: p };
             let i = index
           "
         >

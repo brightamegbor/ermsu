@@ -17,6 +17,7 @@ import { AddrecordsComponent } from "./offices/addrecords/addrecords.component";
 import { SearchStudentComponent } from "./search-student/search-student.component";
 import { OfficeRecordsComponent } from "./offices/office-records/office-records.component";
 import { EditOfficerecordsComponent } from "./offices/edit-officerecords/edit-officerecords.component";
+import { RecordDetailsComponent } from "./offices/record-details/record-details.component";
 
 // Routes array define component along with the path name for url
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: "add-classrecords", component: ClassrecordsComponent },
   { path: "edit-classrecords/:id", component: EditrecordsComponent },
   { path: "edit-officerecords/:id", component: EditOfficerecordsComponent },
+  { path: "view-recorddetails/:id", component: RecordDetailsComponent },
   { path: "add-officerecords", component: AddrecordsComponent },
   { path: "officerecords", component: OfficeRecordsComponent },
   { path: "view-records", component: ViewRecordComponent },

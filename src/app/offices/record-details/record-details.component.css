@@ -1,0 +1,9 @@
+.custom-border-circle {
+  border: 1px solid rgb(156, 156, 156);
+  width: 19vh;
+}
+
+.text-sm {
+  font-size: small;
+  width: 74px;
+}

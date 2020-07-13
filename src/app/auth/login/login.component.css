@@ -23,3 +23,18 @@
 input {
   background-color: transparent !important;
 }
+
+.custom-loading {
+  margin-right: 1rem;
+  padding: 0;
+  top: -1.8rem;
+}
+/* .custom-loading .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #3fb53f;
+} */
+
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #ffffff !important;
+}
