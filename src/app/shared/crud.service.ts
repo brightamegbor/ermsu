@@ -88,6 +88,7 @@ export class CrudService {
   AddClassRecord(classroom: Classroom) {
     this.classrecordsRef.push({
       index: classroom.index,
+      addedBy: classroom.addedBy,
       studentName: classroom.studentName,
       className: classroom.className,
       startDate: classroom.startDate.getTime(),

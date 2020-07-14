@@ -49,7 +49,7 @@
           <th scope="col">Class Name</th>
           <!-- <th scope="col">Took Time</th> -->
           <!-- <th scope="col">Returned Time</th> -->
-          <th class="text-center" scope="col">Status</th>
+          <th class="text-center" scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -77,7 +77,25 @@
             {{ classroom.endDate | date: "medium" }}
           </td> -->
           <td class="text-center action-block">
-            <span *ngIf="classroom.endDate.length <= 0">
+            <span class="text-center" [matMenuTriggerFor]="menu">
+              <i class="fas fa-ellipsis-v"></i>
+            </span>
+            <mat-menu #menu="matMenu">
+              <button
+                *ngIf="classroom.endDate == ''"
+                mat-menu-item
+                routerLink="/edit-classrecords/{{ classroom.$key }}"
+              >
+                edit
+              </button>
+              <button
+                mat-menu-item
+                routerLink="/view-classrecorddetails/{{ classroom.$key }}"
+              >
+                view
+              </button>
+            </mat-menu>
+            <!-- <span *ngIf="classroom.endDate.length <= 0">
               pending
               <i
                 class="fas fa-edit"
@@ -85,7 +103,7 @@
               ></i>
             </span>
 
-            <span *ngIf="!(classroom.endDate.length <= 0)">submitted</span>
+            <span *ngIf="!(classroom.endDate.length <= 0)">submitted</span> -->
           </td>
 
           <!-- <td class="text-center action-block">

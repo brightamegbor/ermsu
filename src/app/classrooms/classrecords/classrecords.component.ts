@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { Classroom } from "src/app/shared/classroom";
 import { Location } from "@angular/common"; // Location service is used to go back to previous component
 import { Router } from "@angular/router";
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
   selector: "app-classrecords",
@@ -15,12 +16,15 @@ export class ClassrecordsComponent implements OnInit {
   public newClassroomsForm: FormGroup; // Define FormGroup to student's form
   Classroom: Classroom[];
 
+  user: string;
+
   constructor(
     public crudApi: CrudService, // CRUD API services
     private location: Location,
     public fb: FormBuilder, // Form Builder service for Reactive forms
     public toastr: ToastrService, // Toastr service for alert message
-    private router: Router
+    private router: Router,
+    private afAuth: AngularFireAuth
   ) {}
 
   ngOnInit() {
@@ -40,11 +44,17 @@ export class ClassrecordsComponent implements OnInit {
       });
       console.log(this.Classroom);
     });
+    this.afAuth.authState.subscribe((user) => {
+      this.user = user.email.toString();
+
+      this.newClassroomsForm.get("addedBy").setValue(this.user);
+    });
   }
 
   // Reactive student form
   newClassroomForm() {
     this.newClassroomsForm = this.fb.group({
+      addedBy: [""],
       index: ["", [Validators.required, Validators.minLength(12)]],
       studentName: ["", [Validators.required, Validators.minLength(2)]],
       className: ["", [Validators.required]],
@@ -56,6 +66,10 @@ export class ClassrecordsComponent implements OnInit {
   }
 
   // Accessing form control using getters
+  get addedBy() {
+    return this.newClassroomsForm.get("addedBy");
+  }
+
   get index() {
     return this.newClassroomsForm.get("index");
   }
